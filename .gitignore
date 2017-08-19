@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+MAKEFILE*
+*.pro.user*
+*.stash
