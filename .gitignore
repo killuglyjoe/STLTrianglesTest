@@ -31,6 +31,7 @@
 *.out
 *.app
 
+Makefile*
 MAKEFILE*
 *.pro.user*
 *.stash
