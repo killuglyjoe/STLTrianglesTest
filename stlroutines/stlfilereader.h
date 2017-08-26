@@ -27,8 +27,9 @@ namespace STLUtils
     {
     public:
         STLFileReader(const std::string &stlFilePath = "");
+        ~STLFileReader(){}
 
-        std::vector<Triangle> trinagleList() const;
+        std::vector<Triangle> trinagles() const;
 
     protected:
         bool isValidASCIISTLFile(std::ifstream &stlFile);

@@ -9,6 +9,14 @@ namespace STLUtils
         m_v2(Vertex()),
         m_v3(Vertex())
     {
+    }
+
+    Triangle::Triangle(const Triangle &t):
+        m_normal(t.normal()),
+        m_v1(t.v1()),
+        m_v2(t.v2()),
+        m_v3(t.v3())
+    {
 
     }
 
@@ -32,12 +40,22 @@ namespace STLUtils
         return m_v1;
     }
 
+    Vertex Triangle::v1()
+    {
+        return m_v1;
+    }
+
     void Triangle::setV2(const Vertex &v2)
     {
         m_v2.setVertex(v2);
     }
 
     Vertex Triangle::v2() const
+    {
+        return m_v2;
+    }
+
+    Vertex Triangle::v2()
     {
         return m_v2;
     }
@@ -52,6 +70,11 @@ namespace STLUtils
         return m_v3;
     }
 
+    Vertex Triangle::v3()
+    {
+        return m_v3;
+    }
+
     bool Triangle::operator != (const Triangle &other) const
     {
         return !operator == (other);
@@ -60,7 +83,15 @@ namespace STLUtils
     bool Triangle::operator == (const Triangle &other) const
     {
         return(    (m_v1 == other.v1())
+                || (m_v1 == other.v2())
+                || (m_v1 == other.v3())
+
+                || (m_v2 == other.v1())
                 || (m_v2 == other.v2())
+                || (m_v2 == other.v3())
+
+                || (m_v3 == other.v1())
+                || (m_v3 == other.v2())
                 || (m_v3 == other.v3())
               );
     }

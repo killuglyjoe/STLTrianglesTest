@@ -9,17 +9,23 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
+CONFIG(debug, debug|release) {
+    DESTDIR     = $$PWD/bin
+    MOC_DIR     = $$PWD/debug/build/moc
+    OBJECTS_DIR = $$PWD/debug/build/obj
+    UI_DIR      = $$PWD/debug/build/ui
+    TARGET      = TrianglesTestD
+}
+CONFIG(release, debug|release) {
+    DESTDIR     = $$PWD/bin
+    MOC_DIR     = $$PWD/release/build/moc
+    OBJECTS_DIR = $$PWD/release/build/obj
+    UI_DIR      = $$PWD/release/build/ui
+}
+
+include($$PWD/utils/utils.pri)
+include($$PWD/stlroutines/stlroutines.pri)
+
 SOURCES += main.cpp \
-    $$PWD/stlroutines/stlfilereader.cpp \
-    $$PWD/utils/comandlineparser.cpp \
-    $$PWD/stlroutines/stlfilewriter.cpp \
-    $$PWD/stlroutines/vertex.cpp \
-    stlroutines/triangle.cpp
 
 HEADERS += \
-    $$PWD/stlroutines/stlfilereader.h \
-    $$PWD/utils/comandlineparser.h \
-    $$PWD/stlroutines/stlfilewriter.h \
-    $$PWD/stlroutines/stlglobals.h \
-    $$PWD/stlroutines/vertex.h \
-    stlroutines/triangle.h

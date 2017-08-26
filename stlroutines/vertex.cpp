@@ -5,7 +5,7 @@
 
 namespace STLUtils
 {
-    static const double cLinkedTolerance(0.01);
+    static const double cEpsilon(0.0001);
 
     Vertex::Vertex() :
         m_x(0.0), m_y(0.0), m_z(0.0)
@@ -30,26 +30,6 @@ namespace STLUtils
         setX(v2.x());
         setY(v2.y());
         setZ(v2.z());
-    }
-
-    bool Vertex::operator != (const Vertex &other) const
-    {
-        return !operator ==(other);
-    }
-
-    bool Vertex::operator == (const Vertex &other) const
-    {
-        double diffX(std::abs(m_x - other.x()));
-        double diffY(std::abs(m_y - other.y()));
-        double diffZ(std::abs(m_z - other.z()));
-
-//        if(diffX > 10*cLinkedTolerance)
-//            std::cout << "Vertex::operator == " << diffX;
-
-        return(    (diffX <= cLinkedTolerance)
-                && (diffY <= cLinkedTolerance)
-                && (diffZ <= cLinkedTolerance)
-              );
     }
 
     void Vertex::setX(const double &x)
@@ -78,5 +58,55 @@ namespace STLUtils
     {
         return m_z;
     }
+
+    bool Vertex::operator != (const Vertex &other) const
+    {
+        return !operator == (other);
+    }
+
+    bool Vertex::operator == (const Vertex &other) const
+    {
+        double diffX(std::abs(m_x - other.x()));
+        double diffY(std::abs(m_y - other.y()));
+        double diffZ(std::abs(m_z - other.z()));
+
+        bool isXTolerate(diffX <= cEpsilon);
+        bool isYTolerate(diffY <= cEpsilon);
+        bool isZTolerate(diffZ <= cEpsilon);
+
+        bool ret(isXTolerate && isYTolerate && isZTolerate);
+
+        return ret;
+    }
+
+    Vertex Vertex::operator - (const Vertex &other)
+    {
+        return (Vertex( m_x - other.x(),
+                        m_y - other.y(),
+                        m_z - other.z())
+                );
+    }
+
+    Vertex Vertex::operator + (const Vertex &other)
+    {
+        return (Vertex( m_x + other.x(),
+                        m_y + other.y(),
+                        m_z + other.z())
+                );
+    }
+    void Vertex::operator -= (const Vertex &other)
+    {
+        m_x -= other.x();
+        m_y -= other.y();
+        m_z -= other.z();
+    }
+
+    void Vertex::operator += (const Vertex &other)
+    {
+        m_x += other.x();
+        m_y += other.y();
+        m_z += other.z();
+    }
+
 
 } // namespace STLUtils

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <regex>
+//#include <regex>
 
 namespace STLUtils
 {
@@ -62,7 +62,7 @@ namespace STLUtils
      * @brief STLFileReader::trinagleList
      * @return
      */
-    std::vector<Triangle> STLFileReader::trinagleList() const
+    std::vector<Triangle> STLFileReader::trinagles() const
     {
         return m_triVec;
     }
@@ -153,7 +153,7 @@ namespace STLUtils
                         {
                             if(getPointFromLine(line, cVertexStr,&pt))
                             {
-//                                std::cout << "Got v1"<< std::endl;
+//                                std::cout << "Got v1 "<<pt<< std::endl;
                                 curTri.setV1(pt);
                                 stlTg = stlTagVertex2;
                                 continue;
@@ -167,7 +167,7 @@ namespace STLUtils
                         {
                             if(getPointFromLine(line, cVertexStr,&pt))
                             {
-//                                std::cout << "Got v2"<< std::endl;
+//                                std::cout << "Got v2 "<<pt<< std::endl;
                                 curTri.setV2(pt);
                                 stlTg = stlTagVertex3;
                                 continue;
@@ -181,10 +181,10 @@ namespace STLUtils
                         {
                             if(getPointFromLine(line, cVertexStr,&pt))
                             {
-//                                std::cout << "Got v3"<< std::endl;
                                 curTri.setV3(pt);
 
                                 m_triVec.push_back(curTri);
+//                                std::cout << "Got v3 "<<pt<<m_triVec.size()<< std::endl;
                                 stlTg = stlTagFacetNormal;
                                 success = true; // we have at least one valid triangle
                                 continue;
