@@ -32,8 +32,10 @@
 *.app
 
 Makefile*
+Makefile
 MAKEFILE*
 *.pro.user
 *.stash
+.qmake.stash
 
 *.user
