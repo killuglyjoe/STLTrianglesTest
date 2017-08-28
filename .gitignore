@@ -33,7 +33,7 @@
 
 Makefile*
 MAKEFILE*
-*.pro.user*
+*.pro.user
 *.stash
 
 *.user
